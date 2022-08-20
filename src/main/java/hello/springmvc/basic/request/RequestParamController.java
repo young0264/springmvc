@@ -22,7 +22,7 @@ public class RequestParamController {
     public void requestParamV1(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String username = request.getParameter("username");
         int age = Integer.parseInt(request.getParameter("age"));
-
+        log.info("username={},age={}", username, age);
         response.getWriter().write("ok hyhyhey");
     }
 
@@ -58,8 +58,8 @@ public class RequestParamController {
     @ResponseBody
     @RequestMapping("/request-param-required")
     public String requestParamRequired(
-            @RequestParam(required = true) String username,
-            @RequestParam(required = false) Integer age) {
+            @RequestParam(required = true) String username, //이 값이 들어와야돼 안들어와도돼 required로 설정true가 default
+            @RequestParam(required = false) Integer age) { //null이 들어갈수 있기때문에 int가아닌 Integer로 써야돼
 //        int a = null;
 //        integer b = null;
         log.info("username={}, age={}", username, age);
@@ -90,7 +90,7 @@ public class RequestParamController {
 //        HelloData helloData = new HelloData();
 //        helloData.setUsername(username);
 //        helloData.setAge(age);
-
+        //HelloData 객체가 생성되고, 요청파라미터의 값도 모두 들어가 있어.
         log.info("helloData={}", helloData);
         log.info(helloData.getUsername(), helloData.getAge());
 
